@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/invoice_list_view.dart';
-import 'package:flutter_app/main_two.dart';
+import 'package:flutter_app/pageview_demo/banner_page_view.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,11 +16,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor:
-        Platform.isAndroid ? Color(0xFF262B33) : Color(0xFFFFFFFF),
-        backgroundColor:
-        Platform.isAndroid ? Color(0xFF262B33) : Color(0xFFFFFFFF),
-      ),
+          primaryColor:
+              Platform.isAndroid ? Color(0xFF262B33) : Color(0xFFFFFFFF),
+          backgroundColor:
+              Platform.isAndroid ? Color(0xFF262B33) : Color(0xFFFFFFFF),
+          brightness: Platform.isAndroid ? Brightness.dark : Brightness.light,
+          // textSelectionColor: Color(0x261880EE),
+          // textSelectionHandleColor: Color(0xFF1880EE),
+          // toggleableActiveColor: Color(0x0D000000),
+          accentColor: Color(0x0D000000)),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -51,31 +55,19 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Image.asset('images/image_test.webp'),
-            Image.network(
-              "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603427730493&di=2793b323b883cfe5709b163581ba751c&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fa%2F55349fb752abc.jpg",
-              height: 300,
-              width: 300,
+            RaisedButton(
+              child: Text('PageView 和指示器，以及进度条的demo'),
+              onPressed: () {
+                _navigationNextPage(CardBannerPageViewWidget());
+              },
             ),
             RaisedButton(
-              child: Text('test buttonx'),
-              onPressed: (){
-                // FirstScreen().pushReplacement2(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => InvoiceStatelessWidget()));
-
-              },
-            )
-
-
+                child: Text("Stack Positioned ListView的运用"),
+                onPressed: () {
+                  _navigationNextPage(InvoiceStatelessWidget());
+                })
           ],
         ),
       ),
@@ -85,5 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void _navigationNextPage(Widget page) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => page));
   }
 }
