@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/invoice_list_view.dart';
 import 'package:flutter_app/pageview_demo/banner_page_view.dart';
+import 'package:flutter_app/webview_h5_demo/my_webview.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,9 +22,6 @@ class MyApp extends StatelessWidget {
           backgroundColor:
               Platform.isAndroid ? Color(0xFF262B33) : Color(0xFFFFFFFF),
           brightness: Platform.isAndroid ? Brightness.dark : Brightness.light,
-          // textSelectionColor: Color(0x261880EE),
-          // textSelectionHandleColor: Color(0xFF1880EE),
-          // toggleableActiveColor: Color(0x0D000000),
           accentColor: Color(0x0D000000)),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -67,7 +65,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text("Stack Positioned ListView的运用"),
                 onPressed: () {
                   _navigationNextPage(InvoiceStatelessWidget());
-                })
+                }),
+            RaisedButton(
+                child: Text("WebView H5 "),
+                onPressed: () {
+                  _navigationNextPage(OrderPaymentWebViewWidget());
+                }),
           ],
         ),
       ),
